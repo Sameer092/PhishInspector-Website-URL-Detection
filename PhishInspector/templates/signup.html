@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <style>
+        /* General reset for margin and padding */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #232526, #414345);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            background-color: #1c1c1c;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            margin-right: 20px; /* Adjust this value for desired spacing */
+        }
+        .navbar-toggler {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-nav .nav-item {
+            margin: 0 15px;
+        }
+        .navbar-nav .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #d4af37; /* Golden hover */
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                display: block;
+            }
+            .navbar-collapse {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            .navbar-collapse.active {
+                display: flex;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                text-align: center;
+            }
+            .navbar-nav .nav-item {
+                margin: 10px 0;
+            }
+        }
+
+        /* Signup Form styles */
+        .signup-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 100px;
+        }
+        .navbar-brand img {
+            margin-right: 20px; /* Adjust this value for desired spacing */
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 28px;
+            color: #d4af37; /* Gold color for header */
+            font-weight: bold;
+        }
+        input::placeholder {
+            color: #bbb;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0 15px -10px;
+            border: none;
+            background: light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4)) ;
+            border-radius: 25px;
+            font-size: 16px;
+            color: black;
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 8px #d4af37, inset 0 4px 8px rgba(0, 0, 0, 0.4);
+            background: #222;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(145deg, #d4af37, #8a7222);
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #e4bf57, #9a7e33);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        p {
+            margin-top: 15px;
+        }
+
+        a {
+            color: #d4af37;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #e4bf57;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/home">
+                <img src="static/logo.png" width="40" height="40" alt="PhishInspector Logo">
+                PhishInspector
+            </a>
+            <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon">&#9776;</span>
+            </button>
+            <div class="navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+                    
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Signup Form -->
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form action="{{ url_for('signup') }}" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Log In</a></p>
+    </div>
+
+    <!-- Script to toggle navbar in mobile view -->
+    <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("navbarNav");
+            navbar.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>

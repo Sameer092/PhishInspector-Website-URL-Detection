@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #232526, #414345);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            background-color: #1c1c1c;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-toggler {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-nav .nav-item {
+            margin: 0 15px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #d4af37; /* Golden hover */
+        }
+        .navbar-collapse {
+            display: flex;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                display: block;
+            }
+            .navbar-collapse {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            .navbar-collapse.active {
+                display: flex;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                text-align: center;
+            }
+            .navbar-nav .nav-item {
+                margin: 10px 0;
+            }
+        }
+
+        /* Contact container styles */
+        .contact-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 28px;
+            color: #d4af37; /* Gold color for header */
+            font-weight: bold;
+        }
+
+        .person-card {
+            background: #dedede;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .person-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .person-role {
+            color: #726e9e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .person-contact {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .social-links a {
+            color: #726e9e;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        .social-links a:hover {
+            color: #4e5c6e;
+        }
+        p {
+            color: #1c1c1c;
+        }
+
+        a {
+            color: #d4af37;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #e4bf57;
+        }
+        .navbar-brand img {
+            margin-right: 20px; /* Adjust this value for desired spacing */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/home">
+                <img src="static/logo.png" width="40" height="40" class="d-inline-block align-top mr-4" alt="PhishInspector Logo">
+                PhishInspector
+            </a>
+            <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon">&#9776;</span>
+            </button>
+            <div class="navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Container -->
+    <div class="contact-container">
+        <h2>Contact Us</h2>
+
+        <div class="person-card">
+            <p class="person-role">CEO</p>
+            <p class="person-name">Sameer</p>
+            <p class="person-contact">Email: <a href="mailto:sameershazad501@gmail.com">sameershazad501@gmail.com</a></p>
+            <div class="social-links">
+                <a href="https://twitter.com/muhammadsameer111" target="_blank">Twitter</a>
+                <a href="https://instagram.com/era_of_sam" target="_blank">Instagram</a>
+            </div>
+        </div>
+
+        <div class="person-card">
+            <p class="person-role">Mentor</p>
+            <p class="person-name">Murad</p>
+            <p class="person-contact">Email: <a href="mailto:muradhameed69@gmail.com">muradhameed69@gmail.com</a></p>
+            <div class="social-links">
+                <a href="https://twitter.com/muradhameed69" target="_blank">Twitter</a>
+                <a href="https://instagram.com/muradh549" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to toggle navbar in mobile view -->
+    <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("navbarNav");
+            navbar.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>

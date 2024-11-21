@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Phishing URL Detection</title>
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #232526, #414345);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            background-color: #1c1c1c;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-toggler {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-nav .nav-item {
+            margin: 0 15px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #d4af37; /* Golden hover */
+        }
+        .navbar-collapse {
+            display: flex;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                display: block;
+            }
+            .navbar-collapse {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            .navbar-collapse.active {
+                display: flex;
+            }
+            .navbar-nav {
+                flex-direction: column;
+                text-align: center;
+            }
+            .navbar-nav .nav-item {
+                margin: 10px 0;
+            }
+        }
+
+        /* About container styles */
+        .about-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 800px;
+            text-align: left;
+            margin-top: 100px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 28px;
+            color: #d4af37; /* Gold color for header */
+            font-weight: bold;
+        }
+
+        h3 {
+            margin-bottom: 25px;
+            font-size: 18px;
+            color: #d4af37; /* Gold color for header */
+            font-weight: bold;
+        }
+
+        p {
+            color: hsl(0, 0%, 100%);
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin: 10px 0;
+            font-size: 18px;
+            color: white;
+        }
+
+        /* Button styles */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(145deg, #d4af37, #8a7222);
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #e4bf57, #9a7e33);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        a {
+            color: #d4af37;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #e4bf57;
+        }
+        .navbar-brand img {
+            margin-right: 20px; /* Adjust this value for desired spacing */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/home">
+                <img src="static/logo.png" width="40" height="40" class="d-inline-block align-top mr-4" alt="PhishInspector Logo">
+                PhishInspector
+            </a>
+            <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon">&#9776;</span>
+            </button>
+            <div class="navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Container -->
+    <div class="about-container">
+        <h2>About Phishing URL Detection</h2>
+        
+        <p>Welcome to <span class="highlight">PhishInspector</span>, a powerful tool designed to help users determine the safety of URLs and detect potential phishing attacks. Our mission is to provide a fast, reliable, and user-friendly way to assess the security of links, helping you make safer decisions online.</p>
+
+        <p>Phishing is one of the most common cyber threats, and it can lead to identity theft, financial loss, and compromised data. With PhishInspector, you can simply enter a URL, and our system will analyze it and give you a safety percentage, indicating how likely the link is to be legitimate or suspicious.</p>
+
+        <h3>Features of PhishInspector:</h3>
+        <ul class="feature-list">
+            <li>Real-time URL analysis for potential phishing threats</li>
+            <li>Simple and intuitive interface for quick results</li>
+            <li>Detailed percentage-based safety score for each URL</li>
+            <li>Guidance on whether it is safe to proceed to a website</li>
+            <li>Constantly updated detection algorithms for accurate analysis</li>
+        </ul>
+
+        <p>Our system uses advanced machine learning algorithms and a vast dataset of known phishing URLs to provide you with the most accurate results. Whether you are a regular internet user or a security-conscious professional, PhishInspector is designed to make online browsing safer for everyone.</p>
+
+        <p>If you're ever unsure about the legitimacy of a link, just check it here on PhishInspector. Your safety is our priority.</p>
+
+        <button class="learn-more-btn" onclick="window.location.href='https://www.ipqualityscore.com/threat-feeds/malicious-url-scanner'">
+            Learn More
+        </button>
+        
+    </div>
+
+    <!-- Script to toggle navbar in mobile view -->
+    <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("navbarNav");
+            navbar.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>
