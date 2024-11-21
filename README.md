@@ -1,9 +1,25 @@
 # PhishInspector 
+
+### Logo
+
 ![image](https://github.com/Sameer092/PhishInspector-Website-URL-Detection/blob/main/PhishInspector/static/logo.png?raw=true)
+
+### Sign in page
+
 ![image](https://github.com/Sameer092/PhishInspector-Website-URL-Detection/blob/main/PhishInspector/static/1.png?raw=true)
+
+### URL detection page
+
 ![image](https://github.com/Sameer092/PhishInspector-Website-URL-Detection/blob/main/PhishInspector/static/2.png?raw=true)
+
 ![image](https://github.com/Sameer092/PhishInspector-Website-URL-Detection/blob/main/PhishInspector/static/3.png?raw=true)
+
+### About us
+
 ![image](https://github.com/Sameer092/PhishInspector-Website-URL-Detection/blob/main/PhishInspector/static/4.png?raw=true)
+
+### Contact us
+
 ![image](https://github.com/Sameer092/PhishInspector-Website-URL-Detection/blob/main/PhishInspector/static/5.png?raw=true)
 
 
@@ -13,6 +29,7 @@ PhishInspector is a website designed to help users assess the safety of any webs
 
 
 ## Installation
+
 This project is built using Python 3.7.9. Ensure Python is installed on your system before proceeding. To set up the project, first clone the repository by following this guide or using the command below:
 ```bash
 git clone https://github.com/Sameer092/PhishInspector-Website-URL-Detection.git
@@ -41,3 +58,5 @@ The development of the PhishInspector website has been a valuable project that s
 The key takeaway from this project is the importance of continuous learning and adaptation in combating evolving cybersecurity threats. By utilizing machine learning models, the website is able to analyze URLs for common indicators of phishing attempts, helping users make informed decisions before interacting with potentially malicious sites.
 
 The PhishInspector project not only emphasizes the significance of website security but also highlights the role of data analysis and machine learning in identifying patterns that can prevent online fraud. Moving forward, this platform can be enhanced with even more sophisticated algorithms and features to keep up with the rapidly changing landscape of cyber threats.
+
+🛡️ ✨ Copyright © 2024 Muhammad Sameer ✨ 🛡️
